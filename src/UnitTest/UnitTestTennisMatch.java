@@ -1,20 +1,22 @@
+import static org.junit.Assert.*;
 import org.junit.*;
 
 public class UnitTestTennisMatch {
 
-    private Player player1;
-    private Player player2;
+    private Player playerJohan;
+    private Player playerNicolas;
 
 
     @Before
     public void init(){
-        player1 = new Player("Johan");
-        player2 = new Player("Nicolas");
+        playerJohan = new Player("Johan");
+        playerNicolas = new Player("Nicolas");
     }
 
     @Test
     public void CreateMatch(){
 
     }
+
 
 }

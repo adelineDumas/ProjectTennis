@@ -15,26 +15,6 @@ public class TennisMatch {
 
     //endregion
 
-    //region enum
-
-    public enum MatchType {
-        BEST_OF_THREE(2), BEST_OF_FIVE(3);
-
-        private final int numberOfSetsToWin;
-
-        private MatchType(int numberOfSetsToWin) {
-            this.numberOfSetsToWin = numberOfSetsToWin;
-        }
-        public int numberOfSetsToWin() {
-            return numberOfSetsToWin;
-        }
-        public int maxNumberOfSets(){
-            return numberOfSetsToWin*2 - 1;
-        }
-    }
-
-    //endregion
-
     //region constructeur
 
     public TennisMatch(Player pPlayer1, Player pPlayer2, MatchType pMatchType, boolean pTieBreakInLastSet){
@@ -43,6 +23,42 @@ public class TennisMatch {
         this.matchType = pMatchType;
         this.tieBreakInLastSet = pTieBreakInLastSet;
 
+    }
+
+    //endregion
+
+    //region getters ou setters
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(Player player1) {
+        this.player1 = player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(Player player2) {
+        this.player2 = player2;
+    }
+
+    public MatchType getMatchType() {
+        return matchType;
+    }
+
+    public void setMatchType(MatchType matchType) {
+        this.matchType = matchType;
+    }
+
+    public boolean isTieBreakInLastSet() {
+        return tieBreakInLastSet;
+    }
+
+    public void setTieBreakInLastSet(boolean tieBreakInLastSet) {
+        this.tieBreakInLastSet = tieBreakInLastSet;
     }
 
     //endregion
