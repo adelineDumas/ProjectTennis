@@ -1,8 +1,6 @@
-package Entities;
-
 /***
  * Classe permettant de stocker un joueur
- * @Author : Adeline Dumas - 14/12/2017
+ * @Author : Adeline Dumas - 14/12/2017 - Création
  */
 public class Player {
 
