@@ -12,6 +12,7 @@ public class TennisMatch {
     private Player player2;
     private MatchType matchType;
     private boolean tieBreakInLastSet;
+    private Jeu jeu;
 
     //endregion
 
@@ -73,7 +74,6 @@ public class TennisMatch {
     public void updateWithPointWonBy(Player pPlayer){
 
     }
-
 
     /***
      * Retourne le score du joueur passé en argument dans le jeu en cours ("40", "15", "A" pour avantage)

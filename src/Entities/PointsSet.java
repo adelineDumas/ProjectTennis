@@ -1,9 +1,5 @@
-/***
- * Permet de calculer les points d'un jeu
- * @Author Adeline Dumas - 14/12/2017 - Création
- */
+public class PointsSet {
 
-public class Points {
 
     //region variables
     private String score;
@@ -12,7 +8,7 @@ public class Points {
 
     //region contructeur
 
-    Points(String pScore) {
+    PointsSet(String pScore) {
         this.score = pScore;
     }
 
@@ -29,13 +25,9 @@ public class Points {
     //region methodes
 
     public void AugmentePoints(){
-        switch (score){
-            case "0" : this.score = "15"; break ;
-            case "15" : this.score = "30"; break ;
-            case "30" : this.score = "40"; break ;
-            case "40" : this.score = "A"; break ;
-            case "A" : this.score = "0"; break ;
-        }
+        int scoreInt = Integer.parseInt(score);
+        scoreInt++;
+        this.score = Integer.toString(scoreInt);
     }
 
     public void DiminuePoint(){
