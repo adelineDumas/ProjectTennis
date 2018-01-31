@@ -35,7 +35,6 @@ public class JeuNormal implements Jeu {
         for (HashMap.Entry<Player,Points> entry : currentScore.entrySet()) {
             Player key = entry.getKey();
             currentScore.get(key).DiminuePoint();
-            
         }
     }
 

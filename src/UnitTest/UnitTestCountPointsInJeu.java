@@ -19,9 +19,9 @@ public class UnitTestCountPointsInJeu {
     @Test
     public void CountPointsInit() {
         Assert.assertEquals("0", jeu.getCurrentPoints(playerJohan));
-        Assert.assertEquals("0", jeu.getCurrentPoints(playerJohan));
+        Assert.assertEquals("0", jeu.getCurrentPoints(playerNicolas));
         Assert.assertNotEquals("15", jeu.getCurrentPoints(playerJohan));
-        Assert.assertNotEquals("15", jeu.getCurrentPoints(playerJohan));
+        Assert.assertNotEquals("15", jeu.getCurrentPoints(playerNicolas));
     }
 
     @Test
@@ -29,10 +29,9 @@ public class UnitTestCountPointsInJeu {
         jeu.AddPoints(playerJohan);
         Assert.assertEquals("15", jeu.getCurrentPoints(playerJohan));
         jeu.AddPoints(playerJohan);
+        Assert.assertEquals("30", jeu.getCurrentPoints(playerJohan));
         jeu.AddPoints(playerJohan);
-        jeu.AddPoints(playerJohan);
-        Assert.assertEquals("A", jeu.getCurrentPoints(playerJohan));
-
+        Assert.assertEquals("40", jeu.getCurrentPoints(playerJohan));
     }
 
     @Test
