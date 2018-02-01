@@ -1,5 +1,10 @@
 import java.util.HashMap;
 
+
+/***
+ * Permet de créer un jeu en mode normal
+ * @Author : Adeline Dumas - 14/12/2017 - Création
+ */
 public class JeuNormal implements Jeu {
 
     //region variable
@@ -30,6 +35,7 @@ public class JeuNormal implements Jeu {
      * S'il y a avantage pour les deux et que l'un marque, les deux repassent à 40
      * @param pPlayer
      */
+    @Override
     public void AddPoints(Player pPlayer){
         Player player2 = new Player("");
         for (HashMap.Entry<Player,PointsJeu> entry : currentScore.entrySet()) {
@@ -44,8 +50,8 @@ public class JeuNormal implements Jeu {
         else {
             currentScore.get(pPlayer).AugmentePoints();
         }
-        if (currentScore.get(player2).getScore().equals("A") && !currentScore.get(pPlayer).getScore().equals("40")){
-            currentScore.get(player2).AugmentePoints();
+        if (currentScore.get(pPlayer).getScore().equals("A") && !currentScore.get(player2).getScore().equals("40")){
+            currentScore.get(pPlayer).AugmentePoints();
         }
 
     }

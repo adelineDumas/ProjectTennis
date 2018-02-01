@@ -1,5 +1,5 @@
 /***
- * Permet de calculer les points d'un jeu
+ * Permet de calculer les points d'un jeu (15-30-40)
  * @Author Adeline Dumas - 14/12/2017 - Création
  */
 
@@ -28,6 +28,9 @@ public class PointsJeu {
 
     //region methodes
 
+    /***
+     * Ajoute les points au joueur
+     */
     public void AugmentePoints(){
         switch (score){
             case "0" : this.score = "15"; break ;
@@ -38,6 +41,9 @@ public class PointsJeu {
         }
     }
 
+    /***
+     * Diminue les points du joueur
+     */
     public void DiminuePoint(){
         switch (score){
             case "A": this.score = "40"; break;

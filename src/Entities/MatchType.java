@@ -19,8 +19,7 @@ public enum MatchType {
         this.numberOfSetsToWin = numberOfSetsToWin;
     }
 
-
-    //endegion
+    //endregion
 
     //region methodes
 

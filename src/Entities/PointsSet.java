@@ -1,3 +1,7 @@
+/**
+ * Permet de calculer les points d'un set (1-2-3-4-5-6-7)
+ * @Author : Adeline Dumas - 14/12/2017 - Création
+ */
 public class PointsSet {
 
 
@@ -24,6 +28,9 @@ public class PointsSet {
 
     //region methodes
 
+    /***
+     * Augmente les points du joueur
+     */
     public void AugmentePoints(){
         int scoreInt = Integer.parseInt(score);
         scoreInt++;

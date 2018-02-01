@@ -41,38 +41,6 @@ public class TennisMatch {
 
     //region getters ou setters
 
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
-    public MatchType getMatchType() {
-        return matchType;
-    }
-
-    public void setMatchType(MatchType matchType) {
-        this.matchType = matchType;
-    }
-
-    public boolean isTieBreakInLastSet() {
-        return tieBreakInLastSet;
-    }
-
-    public void setTieBreakInLastSet(boolean tieBreakInLastSet) {
-        this.tieBreakInLastSet = tieBreakInLastSet;
-    }
-
     //endregion
 
     //region methodes
@@ -94,7 +62,7 @@ public class TennisMatch {
      * @Author - 14/12/2017
      */
     public String pointsForPlayer(Player pPlayer){
-        System.out.println("Points :" + jeu.getCurrentPoints(pPlayer));
+        //System.out.println("Points :" + jeu.getCurrentPoints(pPlayer));
         return jeu.getCurrentPoints(pPlayer);
     }
 
@@ -104,7 +72,7 @@ public class TennisMatch {
      * @Author Adeline Dumas - 14/12/2017 - Création
      */
     public int currentSetNumber(){
-        return 0;
+        return scoreJeuPlayer1.size();
     }
 
     /***
@@ -114,7 +82,12 @@ public class TennisMatch {
      * @Author Adeline Dumas - 14/12/2017 - Création
      */
     public int gamesInCurrentSetForPlayer(Player pPlayer){
-        return 0;
+        if (pPlayer.getName().equals(player1.getName())) {
+            return Integer.parseInt(scoreJeuPlayer1.get(scoreJeuPlayer1.size()).getScore());
+        }
+        else {
+            return Integer.parseInt(scoreJeuPlayer2.get(scoreJeuPlayer2.size()).getScore());
+        }
     }
 
     /***
@@ -139,17 +112,99 @@ public class TennisMatch {
      * @Author Adeline Dumas - 14/12/2017 - Création
      */
     public boolean isFinished(){
-        if (pointsForPlayer(player1) =="Gagné"){
-            scoreJeuPlayer1.get(scoreJeuPlayer1.size()).AugmentePoints();
-            System.out.println(player1.getName() + " gagne le jeu");
-            jeu = new JeuNormal(player1, player2);
+        if (!endMatch()) {
+            if (pointsForPlayer(player1).equals("Gagné")) {
+                scoreJeuPlayer1.get(scoreJeuPlayer1.size()).AugmentePoints();
+                System.out.println(gamesInCurrentSetForPlayer(player1) + " - " + gamesInCurrentSetForPlayer(player2) + " pour " + player1.getName());
+                if (endSet()) {
+                    NewSet();
+                }
+                jeu = new JeuNormal(player1, player2);
+            } else if (pointsForPlayer(player2).equals("Gagné")) {
+                scoreJeuPlayer2.get(scoreJeuPlayer2.size()).AugmentePoints();
+                System.out.println(gamesInCurrentSetForPlayer(player2) + " - " + gamesInCurrentSetForPlayer(player1) + " pour " + player2.getName());
+                if (endSet()) {
+                    NewSet();
+                }
+                jeu = new JeuNormal(player1, player2);
+            }
+            return false;
         }
-        else if (pointsForPlayer(player2) =="Gagné"){
-            scoreJeuPlayer2.get(scoreJeuPlayer2.size()).AugmentePoints();
-            System.out.println(player2.getName() + " gagne le jeu");
-            jeu = new JeuNormal(player1, player2);
+        else {
+            return true;
+        }
+    }
+
+    /***
+     * Détermine si le set est fini ou non
+     * @return true s'il est terminé
+     */
+    public boolean endSet(){
+        if (gamesInCurrentSetForPlayer(player1) >= 6 && ( gamesInCurrentSetForPlayer(player1)-gamesInCurrentSetForPlayer(player2) >=2 )){
+            return true;
+        }
+        if (gamesInCurrentSetForPlayer(player2) >= 6 && ( gamesInCurrentSetForPlayer(player2)-gamesInCurrentSetForPlayer(player1) >=2 )){
+            return true;
         }
         return false;
+    }
+
+    /***
+     * Détermine si le joueur 1 a assez de set gagnés
+     * @return true si oui, false sinon
+     */
+    public boolean IsPlayer1Winner(){
+        int nbWinPlayer1 = 0 ;
+        for (HashMap.Entry<Integer, PointsSet> entry : scoreJeuPlayer1.entrySet()){
+            if (Integer.parseInt(entry.getValue().getScore()) >= Integer.parseInt(scoreJeuPlayer1.get(entry.getKey()).getScore()) -2 && Integer.parseInt(entry.getValue().getScore()) >= 6){
+                nbWinPlayer1++;
+            }
+        }
+        if(nbWinPlayer1 == matchType.numberOfSetsToWin()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /***
+     * Détermine si le joueur 2 a assez de set gagnés
+     * @return true si oui, false sinon
+     */
+    public boolean IsPlayer2Winner(){
+        int nbWinPlayer2 = 0 ;
+        for (HashMap.Entry<Integer, PointsSet> entry : scoreJeuPlayer2.entrySet()){
+            if (Integer.parseInt(entry.getValue().getScore()) >= Integer.parseInt(scoreJeuPlayer2.get(entry.getKey()).getScore()) -2 && Integer.parseInt(entry.getValue().getScore()) >= 6){
+                nbWinPlayer2++;
+            }
+        }
+        if(nbWinPlayer2 == matchType.numberOfSetsToWin()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean endMatch(){
+        if (IsPlayer1Winner()){
+            return true;
+        }
+        if (IsPlayer2Winner()){
+            return true;
+        }
+        return false;
+    }
+
+    /***
+     * Création du nouveau set
+     * @author Adeline Dumas
+     */
+    public void NewSet(){
+        scoreJeuPlayer1.put(scoreJeuPlayer1.size() + 1, new PointsSet("0"));
+        scoreJeuPlayer2.put(scoreJeuPlayer2.size() + 1, new PointsSet("0"));
+
     }
 
     //endregion

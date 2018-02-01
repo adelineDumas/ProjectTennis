@@ -32,6 +32,8 @@ public class UnitTestCountPointsInJeu {
         Assert.assertEquals("30", jeu.getCurrentPoints(playerJohan));
         jeu.AddPoints(playerJohan);
         Assert.assertEquals("40", jeu.getCurrentPoints(playerJohan));
+        jeu.AddPoints(playerJohan);
+        Assert.assertEquals("Gagné", jeu.getCurrentPoints(playerJohan));
     }
 
     @Test
