@@ -1,3 +1,4 @@
+import java.util.HashMap;
 
 /***
  * Classe permettant de gérer l'évolution du score d'un match de tennis en fonction du joueur qui marque un point
@@ -13,6 +14,8 @@ public class TennisMatch {
     private MatchType matchType;
     private boolean tieBreakInLastSet;
     private Jeu jeu;
+    private HashMap<Integer, PointsSet> scoreJeuPlayer1;
+    private HashMap<Integer, PointsSet> scoreJeuPlayer2;
 
     //endregion
 
@@ -23,6 +26,14 @@ public class TennisMatch {
         this.player2 = pPlayer2;
         this.matchType = pMatchType;
         this.tieBreakInLastSet = pTieBreakInLastSet;
+
+        jeu = new JeuNormal(pPlayer1, pPlayer2);
+
+        this.scoreJeuPlayer1 = new HashMap<>();
+        scoreJeuPlayer1.put(1, new PointsSet("0"));
+        this.scoreJeuPlayer2 = new HashMap<>();
+        scoreJeuPlayer2.put(1, new PointsSet("0"));
+
 
     }
 
@@ -72,7 +83,8 @@ public class TennisMatch {
      * @Author Adeline Dumas - 14/12/2017 - Création
      */
     public void updateWithPointWonBy(Player pPlayer){
-
+        jeu.AddPoints(pPlayer);
+        isFinished();
     }
 
     /***
@@ -82,7 +94,8 @@ public class TennisMatch {
      * @Author - 14/12/2017
      */
     public String pointsForPlayer(Player pPlayer){
-        return null;
+        System.out.println("Points :" + jeu.getCurrentPoints(pPlayer));
+        return jeu.getCurrentPoints(pPlayer);
     }
 
     /***
@@ -112,7 +125,12 @@ public class TennisMatch {
      * @Author Adeline Dumas - 14/12/2017 - Création
      */
     public int gamesInSetForPlayer(int pSetNumber, Player pPlayer){
-        return 0;
+        if (pPlayer.getName().equals(player1.getName())) {
+            return Integer.parseInt(scoreJeuPlayer1.get(pSetNumber).getScore());
+        }
+        else {
+            return Integer.parseInt(scoreJeuPlayer2.get(pSetNumber).getScore());
+        }
     }
 
     /***
@@ -121,6 +139,16 @@ public class TennisMatch {
      * @Author Adeline Dumas - 14/12/2017 - Création
      */
     public boolean isFinished(){
+        if (pointsForPlayer(player1) =="Gagné"){
+            scoreJeuPlayer1.get(scoreJeuPlayer1.size()).AugmentePoints();
+            System.out.println(player1.getName() + " gagne le jeu");
+            jeu = new JeuNormal(player1, player2);
+        }
+        else if (pointsForPlayer(player2) =="Gagné"){
+            scoreJeuPlayer2.get(scoreJeuPlayer2.size()).AugmentePoints();
+            System.out.println(player2.getName() + " gagne le jeu");
+            jeu = new JeuNormal(player1, player2);
+        }
         return false;
     }
 

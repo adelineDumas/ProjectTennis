@@ -4,7 +4,7 @@ public class JeuNormal implements Jeu {
 
     //region variable
 
-    HashMap<Player, Points> currentScore;
+    HashMap<Player, PointsJeu> currentScore;
 
     //endregion
 
@@ -12,8 +12,8 @@ public class JeuNormal implements Jeu {
 
     public JeuNormal(Player pPlayer1, Player pPlayer2) {
         currentScore = new HashMap<>();
-        currentScore.put(pPlayer1, new Points("0"));
-        currentScore.put(pPlayer2, new Points("0"));
+        currentScore.put(pPlayer1, new PointsJeu("0"));
+        currentScore.put(pPlayer2, new PointsJeu("0"));
     }
 
     //endregion
@@ -31,11 +31,23 @@ public class JeuNormal implements Jeu {
      * @param pPlayer
      */
     public void AddPoints(Player pPlayer){
-        currentScore.get(pPlayer).AugmentePoints();
-        for (HashMap.Entry<Player,Points> entry : currentScore.entrySet()) {
+        Player player2 = new Player("");
+        for (HashMap.Entry<Player,PointsJeu> entry : currentScore.entrySet()) {
             Player key = entry.getKey();
-            currentScore.get(key).DiminuePoint();
+            if (! key.getName().equals(pPlayer.getName())) {
+                player2 = key;
+            }
         }
+        if (currentScore.get(player2).getScore().equals("A") && currentScore.get(pPlayer).getScore().equals("40")){
+            currentScore.get(player2).DiminuePoint();
+        }
+        else {
+            currentScore.get(pPlayer).AugmentePoints();
+        }
+        if (currentScore.get(player2).getScore().equals("A") && !currentScore.get(pPlayer).getScore().equals("40")){
+            currentScore.get(player2).AugmentePoints();
+        }
+
     }
 
     //endregion

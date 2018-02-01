@@ -3,7 +3,7 @@
  * @Author Adeline Dumas - 14/12/2017 - Création
  */
 
-public class Points {
+public class PointsJeu {
 
     //region variables
     private String score;
@@ -12,7 +12,7 @@ public class Points {
 
     //region contructeur
 
-    Points(String pScore) {
+    PointsJeu(String pScore) {
         this.score = pScore;
     }
 
@@ -34,7 +34,7 @@ public class Points {
             case "15" : this.score = "30"; break ;
             case "30" : this.score = "40"; break ;
             case "40" : this.score = "A"; break ;
-            case "A" : this.score = "0"; break ;
+            case "A" : this.score = "Gagné"; break ;
         }
     }
 

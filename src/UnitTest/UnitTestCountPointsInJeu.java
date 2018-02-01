@@ -44,10 +44,19 @@ public class UnitTestCountPointsInJeu {
         jeu.AddPoints(playerNicolas);
         jeu.AddPoints(playerNicolas);
 
-        jeu.AddPoints(playerJohan);
-        jeu.AddPoints(playerNicolas);
         Assert.assertEquals("40", jeu.getCurrentPoints(playerJohan));
         Assert.assertEquals("40", jeu.getCurrentPoints(playerNicolas));
+
+        jeu.AddPoints(playerNicolas);
+        Assert.assertEquals("A", jeu.getCurrentPoints(playerNicolas));
+
+        jeu.AddPoints(playerJohan);
+        Assert.assertEquals("40", jeu.getCurrentPoints(playerNicolas));
+        Assert.assertEquals("40", jeu.getCurrentPoints(playerJohan));
+
+        jeu.AddPoints(playerNicolas);
+        jeu.AddPoints(playerNicolas);
+        Assert.assertEquals("Gagné", jeu.getCurrentPoints(playerNicolas));
 
     }
 

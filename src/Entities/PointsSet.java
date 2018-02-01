@@ -30,11 +30,6 @@ public class PointsSet {
         this.score = Integer.toString(scoreInt);
     }
 
-    public void DiminuePoint(){
-        switch (score){
-            case "A": this.score = "40"; break;
-        }
-    }
 
     //endregion
 }
