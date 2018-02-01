@@ -160,7 +160,7 @@ public class TennisMatch {
                 nbWinPlayer1++;
             }
         }
-        if(nbWinPlayer1 == matchType.numberOfSetsToWin()){
+        if(nbWinPlayer1 == matchType.numberOfSetsToWin() && nbWinPlayer1 <= matchType.maxNumberOfSets()){
             return true;
         }
         else {
@@ -179,7 +179,7 @@ public class TennisMatch {
                 nbWinPlayer2++;
             }
         }
-        if(nbWinPlayer2 == matchType.numberOfSetsToWin()){
+        if(nbWinPlayer2 == matchType.numberOfSetsToWin() && nbWinPlayer2 <= matchType.maxNumberOfSets()){
             return true;
         }
         else {

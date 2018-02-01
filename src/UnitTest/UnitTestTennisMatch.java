@@ -5,94 +5,117 @@ public class UnitTestTennisMatch {
 
     private Player playerJohan;
     private Player playerNicolas;
-    private TennisMatch match;
+    private TennisMatch match3Set;
+    private TennisMatch match5Set;
 
 
     @Before
     public void init(){
         playerJohan = new Player("Johan");
         playerNicolas = new Player("Nicolas");
-        match = new TennisMatch(playerJohan, playerNicolas, MatchType.BEST_OF_THREE, false);
+        match3Set = new TennisMatch(playerJohan, playerNicolas, MatchType.BEST_OF_THREE, false);
+        match5Set = new TennisMatch(playerJohan, playerNicolas, MatchType.BEST_OF_FIVE, false);
     }
 
     @Test
     public void TestGagneSet(){
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
 
-        match.updateWithPointWonBy(playerJohan);
-        match.updateWithPointWonBy(playerJohan);
-        match.updateWithPointWonBy(playerJohan);
-        match.updateWithPointWonBy(playerJohan);
+        match3Set.updateWithPointWonBy(playerJohan);
+        match3Set.updateWithPointWonBy(playerJohan);
+        match3Set.updateWithPointWonBy(playerJohan);
+        match3Set.updateWithPointWonBy(playerJohan);
 
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
 
-        match.updateWithPointWonBy(playerNicolas);
-        assertEquals("0", match.pointsForPlayer(playerNicolas));
+        match3Set.updateWithPointWonBy(playerNicolas);
+        assertEquals("0", match3Set.pointsForPlayer(playerNicolas));
 
-        assertEquals(1, match.gamesInSetForPlayer(1, playerNicolas));
-        assertEquals(0, match.gamesInSetForPlayer(1, playerJohan));
+        assertEquals(1, match3Set.gamesInSetForPlayer(1, playerNicolas));
+        assertEquals(0, match3Set.gamesInSetForPlayer(1, playerJohan));
     }
 
     @Test
     public void TestCurrentSet(){
-        assertEquals(1, match.currentSetNumber());
+        assertEquals(1, match3Set.currentSetNumber());
 
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
 
-        assertEquals(1, match.currentSetNumber());
+        assertEquals(1, match3Set.currentSetNumber());
 
     }
 
     @Test
     public void TestGamesInSetForPlayer(){
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
 
-        assertEquals(1, match.gamesInSetForPlayer(1, playerNicolas));
+        assertEquals(1, match3Set.gamesInSetForPlayer(1, playerNicolas));
 
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
+        match3Set.updateWithPointWonBy(playerNicolas);
 
-        assertEquals(2, match.gamesInSetForPlayer(1, playerNicolas));
+        assertEquals(2, match3Set.gamesInSetForPlayer(1, playerNicolas));
 
     }
 
     @Test public void TestGamesInCurrentSetForplayer(){
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
-        match.updateWithPointWonBy(playerNicolas);
+        for (int i = 0 ; i<8 ; i++){
+            match3Set.updateWithPointWonBy(playerNicolas);
+        }
 
 
-        assertEquals(2, match.gamesInCurrentSetForPlayer(playerNicolas));
-        assertEquals(0, match.gamesInCurrentSetForPlayer(playerJohan));
+        assertEquals(2, match3Set.gamesInCurrentSetForPlayer(playerNicolas));
+        assertEquals(0, match3Set.gamesInCurrentSetForPlayer(playerJohan));
     }
 
-    @Test public void TestEndMatch(){
+    @Test public void TestEndMatch3Sets(){
         for (int i = 0 ; i<24 ; i++){
-            match.updateWithPointWonBy(playerNicolas);
+            match3Set.updateWithPointWonBy(playerNicolas);
         }
         for (int i = 0 ; i<24 ; i++){
-            match.updateWithPointWonBy(playerJohan);
+            match3Set.updateWithPointWonBy(playerJohan);
         }
         for (int i = 0 ; i<24 ; i++){
-            match.updateWithPointWonBy(playerNicolas);
+            match3Set.updateWithPointWonBy(playerNicolas);
         }
-        assertEquals(true, match.endMatch());
+        assertEquals(true, match3Set.endMatch());
+
+    }
+
+    @Test public void TestEndMatch5Sets(){
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerNicolas);
+        }
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerJohan);
+        }
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerNicolas);
+        }
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerJohan);
+        }
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerNicolas);
+        }
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerNicolas);
+        }
+        for (int i = 0 ; i<24 ; i++){
+            match5Set.updateWithPointWonBy(playerNicolas);
+        }
+        assertEquals(true, match5Set.endMatch());
 
     }
 
